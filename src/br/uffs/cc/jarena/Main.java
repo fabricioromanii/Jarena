@@ -1,5 +1,5 @@
 /**
- * Faz uma batalha entre agentes dentro de uma arena.
+ * Faz uma batalha entre agentes dentro de uma arena. 
  * 
  * Fernando Bevilacqua <fernando.bevilacqua@uffs.edu.br>
  */
