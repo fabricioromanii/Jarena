@@ -469,7 +469,6 @@ abstract public class Agente extends Entidade
 		}
 		protegeInformacoes(false);
 	}
-	
 	public String toString() {
 		return "["+getEquipe() + getId()+"] energia="+getEnergia()+", x="+getX()+", y="+getY() + ", status=" + (isParado() ? "parado":"andando");
 	}	

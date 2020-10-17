@@ -12,7 +12,7 @@ import java.util.HashMap;
  
 public abstract class Entidade
 {
-	private static int contador							= 0;
+	private static int contador = 0;
 	
 	private int x;
 	private int y;

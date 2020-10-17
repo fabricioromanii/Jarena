@@ -23,14 +23,15 @@ public class AgenteDummy extends Agente
 			// Como não conseguimos nos mover, vamos escolher uma direção
 			// nova.
 			setDirecao(geraDirecaoAleatoria());
+			System.out.println(getDirecao() + "OIIIIII");
+			
 		}
+		
 		
 		// Se o agente conseguie se dividir (tem energia) e se o total de energia
 		// do agente é maior que 400, nos dividimos. O agente filho terá a metade
 		// da nossa energia atual.
-		if(podeDividir() && getEnergia() >= 800) {
-			divide();
-		}
+		
 	}
 	
 	public void recebeuEnergia() {
@@ -48,10 +49,13 @@ public class AgenteDummy extends Agente
 	
 	public void recebeuMensagem(String msg) {
 		// Invocado sempre que um agente aliado próximo envia uma mensagem.
+		
+		
+		
 	}
 	
 	public String getEquipe() {
-		// Definimos que o nome da equipe do agente é "Fernando".
+		// Definimos que o nome da equipe do agente é "Fabricio e Pedro".
 		return "Fabricio e Pedro ";
 	}
 }
