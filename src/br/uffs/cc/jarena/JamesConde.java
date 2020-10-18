@@ -8,9 +8,9 @@
 
 package br.uffs.cc.jarena;
 
-public class AgenteDummy extends Agente
+public class JamesConde extends Agente
 {
-	public AgenteDummy(Integer x, Integer y, Integer energia) {
+	public JamesConde(Integer x, Integer y, Integer energia) {
 		super(x, y, energia);
 		setDirecao(geraDirecaoAleatoria());
 	}
@@ -23,7 +23,7 @@ public class AgenteDummy extends Agente
 			// Como não conseguimos nos mover, vamos escolher uma direção
 			// nova.
 			setDirecao(geraDirecaoAleatoria());
-			System.out.println(getDirecao() + "OIIIIII");
+			//System.out.println(getDirecao() + "OIIIIII");
 			
 		}
 		
