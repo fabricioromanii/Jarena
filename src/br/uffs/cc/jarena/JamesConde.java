@@ -11,9 +11,8 @@ package br.uffs.cc.jarena;
 public class JamesConde extends Agente
 {
 	public JamesConde(Integer x, Integer y, Integer energia) {
-		super(x, y, energia);
-		setDirecao(geraDirecaoAleatoria());
-	}
+		super(x, y, energia);			
+		para();	}
 	
 	public void pensa() {
 		// Se não conseguimos nos mover para a direção atual, quer dizer
@@ -23,11 +22,24 @@ public class JamesConde extends Agente
 			// Como não conseguimos nos mover, vamos escolher uma direção
 			// nova.
 			setDirecao(geraDirecaoAleatoria());
-			//System.out.println(getDirecao() + "OIIIIII");
-			
+			System.out.println("James Conde vai mudar de direcao");
+		}
+		/*
+		if(podeDividir() == true && getEnergia() > 800 ) {
+			divide();
+			geraDirecaoAleatoria();
+		}*/
+		if(getDirecao() == 1 && getX() == 500){
+			setDirecao(4);
+		}
+		if (getY() == 500 && getX() == 520){
+			setDirecao(geraDirecaoAleatoria());
 		}
 		
-		
+
+		if(getDirecao() == 4 && getY() == 500){
+			setDirecao(1);
+		}
 		// Se o agente conseguie se dividir (tem energia) e se o total de energia
 		// do agente é maior que 400, nos dividimos. O agente filho terá a metade
 		// da nossa energia atual.
@@ -41,10 +53,12 @@ public class JamesConde extends Agente
 	public void tomouDano(int energiaRestanteInimigo) {
 		// Invocado quando o agente está na mesma posição que um agente inimigo
 		// e eles estão batalhando (ambos tomam dano).
+		System.out.println("Estou tomando dano !!!!");
 	}
 	
 	public void ganhouCombate() {
 		// Invocado se estamos batalhando e nosso inimigo morreu.
+		System.out.println("Ganhei essa luta! Da proxima vez tente ser bom, nao seja apenas voce.");
 	}
 	
 	public void recebeuMensagem(String msg) {
@@ -55,7 +69,7 @@ public class JamesConde extends Agente
 	}
 	
 	public String getEquipe() {
-		// Definimos que o nome da equipe do agente é "Fabricio e Pedro".
-		return "Fabricio e Pedro ";
+		// Definimos que o nome da equipe do agente é "James Conde".
+		return "James Conde";
 	}
 }
