@@ -47,13 +47,13 @@ public class JamesConde extends Agente
 			setDirecao(geraDirecaoAleatoria());
 			System.out.println("bati numa parede, mudando direcao!");	
 		}
-		
+		/*
 		if(podeDividir() && getEnergia() >= 900 && getX() > 100 && getY() > 100) {
 			divide();
 			setDirecao(geraDirecaoAleatoria());
-		}
+		}*/
 
-		if((MeuContadorAuxiliar % 17) == 0 && isParado()){
+		if((MeuContadorAuxiliar % 16) == 0 && isParado()){
 			setDirecao(geraDirecaoAleatoria());
 		}
 	}
@@ -61,6 +61,8 @@ public class JamesConde extends Agente
 	public void recebeuEnergia() {
 		// Invocado sempre que o agente recebe energia.
 			para();
+			System.out.println(getX() + "|" + getY());
+			enviaMensagem(getX() +"|" + getY());
 	}
 	
 	public void tomouDano(int energiaRestanteInimigo) {
@@ -77,26 +79,26 @@ public class JamesConde extends Agente
 			}
 
 	}
-	/*
+	
 	public void MovePara(int x, int y){
 
 		this.alvo_x = x;
 		this.alvo_y = y;
 		
-		if(alvo_x > getX()){
-			setDirecao(DIREITA);
-		}
-		else if (alvo_x < getX()){
+		if( getX() > alvo_x ){
 			setDirecao(ESQUERDA);
 		}
-		else if (alvo_y > getY()){
+		else if ( getX() < alvo_x){
+			setDirecao(DIREITA);
+		}
+		else if ( getY() > alvo_y ) {
+			setDirecao(CIMA);
+		} 
+		else if( getY() < alvo_y){
 			setDirecao(BAIXO);
 		}
-		else(alvo_y < getY()){
-			setDirecao(CIMA);
-		}
-
-	}*/
+		
+	}
 
 	public void ganhouCombate() {
 		// Invocado se estamos batalhando e nosso inimigo morreu.
@@ -105,6 +107,16 @@ public class JamesConde extends Agente
 	
 	public void recebeuMensagem(String msg) {
 		// Invocado sempre que um agente aliado próximo envia uma mensagem.
+
+		String Coordenadas[] = new String[2];
+		
+		Coordenadas = msg.split("|");
+
+		int meuX =Integer.parseInt(Coordenadas[0]);
+		int meuY =Integer.parseInt(Coordenadas[1]);
+
+		MovePara(meuX,meuY);
+        
 	}
 	
 	public String getEquipe() {
