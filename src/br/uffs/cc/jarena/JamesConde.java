@@ -61,8 +61,9 @@ public class JamesConde extends Agente
 	public void recebeuEnergia() {
 		// Invocado sempre que o agente recebe energia.
 			para();
-			System.out.println(getX() + "|" + getY());
-			enviaMensagem(getX() +"|" + getY());
+			//System.out.println(getX() + "|" + getY());
+			//(getX() +"|" + getY());
+			//100|300
 	}
 	
 	public void tomouDano(int energiaRestanteInimigo) {
@@ -79,7 +80,7 @@ public class JamesConde extends Agente
 			}
 
 	}
-	
+	/*
 	public void MovePara(int x, int y){
 
 		this.alvo_x = x;
@@ -98,7 +99,7 @@ public class JamesConde extends Agente
 			setDirecao(BAIXO);
 		}
 		
-	}
+	}*/
 
 	public void ganhouCombate() {
 		// Invocado se estamos batalhando e nosso inimigo morreu.
@@ -107,16 +108,19 @@ public class JamesConde extends Agente
 	
 	public void recebeuMensagem(String msg) {
 		// Invocado sempre que um agente aliado próximo envia uma mensagem.
-
+		/*String aa = msg; 
 		String Coordenadas[] = new String[2];
+		//100|200|3000|Agente02
+		Coordenadas = aa.split("|");
+		//100 [0]
+		//200 [1]
 		
-		Coordenadas = msg.split("|");
-
 		int meuX =Integer.parseInt(Coordenadas[0]);
 		int meuY =Integer.parseInt(Coordenadas[1]);
-
-		MovePara(meuX,meuY);
-        
+		//100 int 
+		//200 int
+		MovePara(meuX,meuY);*/
+		
 	}
 	
 	public String getEquipe() {
