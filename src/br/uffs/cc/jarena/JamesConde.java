@@ -2,43 +2,44 @@ package br.uffs.cc.jarena;
 
 public class JamesConde extends Agente {
 
-	int MeuContador;
-	int MeuContadorAuxiliar;
+	public int ContadorAuxiliar;
+	public int ContadorDoJogo;
 	public int alvo_x;
 	public int alvo_y;
-	public int distanciaX;
-	public int distanciaY;
-	int THC;
-	int THCaux;
 
 	public JamesConde(Integer x, Integer y, Integer energia) {
 		super(x, y, energia);
-		MeuContador = 5;
-		MeuContadorAuxiliar = 0;
+		ContadorAuxiliar = 5;
+		ContadorDoJogo = 0;
 		setDirecao(BAIXO);
 	}
 
 	public void pensa() {
-		// if (estou_tomando_dano) { //entra no modo corrida this.modo_fuga = true; }
+		// Aqui dentro de pensa() fica toda a "Inteligencia" do James.
 		movimenta();
-		MeuContadorAuxiliar++;
-
+		ContadorDoJogo++;
 	}
 
 	public void movimenta() {
-		// movimenta faz a movimentação do agente;
-		if (getY() == 20 && getX() == 0) {
+		// Dentro de movimenta() é aonde o James faz toda a sua movimentação;
+		// O que essa classe possui poderia ir pra dentro de pensa(), mas separamos pra
+		// ficar mais organizado.
+		if (ContadorDoJogo == 10) {
+			// Ele começa indo para baixo, e depois de 20 tempos comeca a ir para a direita;
 			setDirecao(DIREITA);
 		}
 
-		if ((MeuContadorAuxiliar % 4) == 0) { // em teoria, vai fazer com que so seja executado a cada 3 tempos;
-			if (MeuContador <= 33) {
-				// pega o id de 5 a 33, que é o minimo e o maximo do id do meu agente.
-				if (getId() == MeuContador && getX() > 10) {
+		if ((ContadorDoJogo % 4) == 0) {
+			// aqui, os meus agentes estarao indo para a direita quando entrarem nessa
+			// condição.
+			// o que ela fará é mandar um por vez para baixo, para que eles se espalhem e
+			// dominem o mapa;
+			if (ContadorAuxiliar <= 33) {
+				if (getId() == ContadorAuxiliar && getX() > 10) {
 					setDirecao(BAIXO);
 					System.out.println("Estou indo para baixo");
 				}
-				MeuContador++;
+				ContadorAuxiliar++;
 			}
 		}
 
@@ -47,51 +48,52 @@ public class JamesConde extends Agente {
 			setDirecao(geraDirecaoAleatoria());
 			System.out.println("bati numa parede, mudando direcao!");
 		}
-		/*
-		 * if(podeDividir() && getEnergia() >= 900 && getX() > 100 && getY() > 100) {
-		 * divide(); setDirecao(geraDirecaoAleatoria()); }
-		 */
-		if ((MeuContadorAuxiliar % 16) == 0 && isParado()) {
+
+		if (podeDividir() && getEnergia() >= 900 && getX() > 50 && getY() > 50) {
+			// se ele pode se dividir, tem energia>900 e ja passou de uma certa parte do
+			// mapa, entao ele divide;
+			divide();
 			setDirecao(geraDirecaoAleatoria());
 		}
-		/*
-		 * if (getX() > 600 || getY() > 30) { MeuContador = 5;
-		 * 
-		 * if (MeuContador <= 33) { if (getId() == MeuContador) { THC = getX(); int
-		 * ContAux = MeuContador + 2; if (getId() == ContAux) { THCaux = getX(); } if
-		 * ((THC - THCaux) < 25) { setDirecao(geraDirecaoAleatoria());
-		 * System.out.println("temo junto"); } }
-		 * 
-		 * } MeuContador++; }
-		 */
+
+		if ((ContadorDoJogo % 16) == 0 && isParado()) {
+			// Nao vai deixar nenhum agente parado por mais de 16 tempos.
+			// Sempre que isso acontecer, essa condição dará a ele uma nova direção;
+			setDirecao(geraDirecaoAleatoria());
+		}
 	}
 
 	public void recebeuEnergia() {
 		// Invocado sempre que o agente recebe energia.
+		// Quando ele recebe energia, para. Para conseguir aproveitar o maximo possivel.
 		para();
 		System.out.println(getX() + "," + getY());
 		String ox = Integer.toString(getX());
 		String oy = Integer.toString(getY());
+		// Quando recebe energia, ele manda uma mensagens com suas coordenadas aos
+		// agentes mais proximos.
 		enviaMensagem(ox + "," + oy);
-
 	}
 
 	public void tomouDano(int energiaRestanteInimigo) {
 		// Invocado quando o agente está na mesma posição que um agente inimigo
 		// e eles estão batalhando (ambos tomam dano).
-
+		// o que essa condição diz é que se ele tem energia suficiente para ganhar entao
+		// se manterá parado.
+		// Se ele nao tem energia suficiente, vai correr.
 		if (getEnergia() > energiaRestanteInimigo) {
 			para();
 			System.out.println("Agente " + getId() + " esta tomando dano.");
 		} else {
 			setDirecao(geraDirecaoAleatoria());
 			System.out.println("Agente " + getId() + " vai fugir da luta.");
-
 		}
 	}
 
 	public void MovePara(int x, int y) {
-
+		// Move para ele recebe como parametro os numeros da coordenada de um agente que
+		// esta recebendo energia;
+		// o que eu quero fazer é que meus agentes se movam para esse lugar no mapa.
 		if (getX() > x) {
 			setDirecao(ESQUERDA);
 		} else if (getX() < x) {
@@ -101,7 +103,6 @@ public class JamesConde extends Agente {
 		} else if (getY() < y) {
 			setDirecao(BAIXO);
 		}
-
 	}
 
 	public void ganhouCombate() {
@@ -111,16 +112,16 @@ public class JamesConde extends Agente {
 
 	public void recebeuMensagem(String msg) {
 		// Invocado sempre que um agente aliado próximo envia uma mensagem.
-
+		// Essa funcao vai receber do usuario uma mensagem que contem suas coordenadas;
+		// é chamada sempre que algum deles recebe energia;
 		String[] Coordenadas = msg.split(",");
 		int meuX = Integer.parseInt(Coordenadas[0]);
 		int meuY = Integer.parseInt(Coordenadas[1]);
-
-		// System.out.println(meuX);
-		// System.out.println(meuY);
-
+		System.out.println("Opa! Ali tem energia, vou mudar de direção!");
+		// Depois dessa mensagem ser dividida e convertida para um numero, eu quero que
+		// os agentes proximos vao para essa posição.
+		// É ai que entra a funcao MovePara();
 		MovePara(meuX, meuY);
-
 	}
 
 	public String getEquipe() {
