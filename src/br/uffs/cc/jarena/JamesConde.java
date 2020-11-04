@@ -7,12 +7,14 @@ public class JamesConde extends Agente {
 	public int alvo_x;
 	public int alvo_y;
 
+
 	public JamesConde(Integer x, Integer y, Integer energia) {
 		super(x, y, energia);
 		ContadorAuxiliar = 5;
 		ContadorDoJogo = 0;
 		setDirecao(BAIXO);
 	}
+
 
 	public void pensa() {
 		// Aqui dentro de pensa() fica toda a "Inteligencia" do James.
@@ -24,7 +26,7 @@ public class JamesConde extends Agente {
 		// Dentro de movimenta() é aonde o James faz toda a sua movimentação;
 		// O que essa classe possui poderia ir pra dentro de pensa(), mas separamos pra
 		// ficar mais organizado.
-		if (ContadorDoJogo == 10) {
+		if (ContadorDoJogo == 8) {
 			// Ele começa indo para baixo, e depois de 20 tempos comeca a ir para a direita;
 			setDirecao(DIREITA);
 		}
@@ -49,7 +51,7 @@ public class JamesConde extends Agente {
 			System.out.println("bati numa parede, mudando direcao!");
 		}
 
-		if (podeDividir() && getEnergia() >= 900 && getX() > 50 && getY() > 50) {
+		if (podeDividir() && getEnergia() >= 1000 && getX() > 50 && getY() > 50) {
 			// se ele pode se dividir, tem energia>900 e ja passou de uma certa parte do
 			// mapa, entao ele divide;
 			divide();
@@ -62,6 +64,7 @@ public class JamesConde extends Agente {
 			setDirecao(geraDirecaoAleatoria());
 		}
 	}
+	
 
 	public void recebeuEnergia() {
 		// Invocado sempre que o agente recebe energia.
@@ -125,7 +128,7 @@ public class JamesConde extends Agente {
 	}
 
 	public String getEquipe() {
-		// Definimos que o nome da equipe do agente é "James Conde".
-		return "James Conde";
+		// Definimos que o nome da equipe do agente é "Pedro e Fabricio".
+		return "Pedro e Fabricio";
 	}
 }
