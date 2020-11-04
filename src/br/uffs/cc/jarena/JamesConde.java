@@ -1,47 +1,46 @@
-package br.uffs.cc.jarena;
+c//Pedro Manfio Lill 
+//Fabrício Zanotto
+//Agente James Conde
 
+package br.uffs.cc.jarena;
 public class JamesConde extends Agente {
 
-	public int ContadorAuxiliar;
-	public int ContadorDoJogo;
-	public int alvo_x;
-	public int alvo_y;
-
+	public int ContadorAuxiliarJames;
+	public int ContadorJames;
 
 	public JamesConde(Integer x, Integer y, Integer energia) {
 		super(x, y, energia);
-		ContadorAuxiliar = 5;
-		ContadorDoJogo = 0;
+		ContadorAuxiliarJames = 5;
+		ContadorJames = 0;
 		setDirecao(BAIXO);
 	}
-
 
 	public void pensa() {
 		// Aqui dentro de pensa() fica toda a "Inteligencia" do James.
 		movimenta();
-		ContadorDoJogo++;
+		ContadorJames++;
 	}
 
 	public void movimenta() {
 		// Dentro de movimenta() é aonde o James faz toda a sua movimentação;
 		// O que essa classe possui poderia ir pra dentro de pensa(), mas separamos pra
 		// ficar mais organizado.
-		if (ContadorDoJogo == 8) {
+		if (ContadorJames == 8) {
 			// Ele começa indo para baixo, e depois de 20 tempos comeca a ir para a direita;
 			setDirecao(DIREITA);
 		}
 
-		if ((ContadorDoJogo % 4) == 0) {
+		if ((ContadorJames % 4) == 0) {
 			// aqui, os meus agentes estarao indo para a direita quando entrarem nessa
 			// condição.
 			// o que ela fará é mandar um por vez para baixo, para que eles se espalhem e
 			// dominem o mapa;
-			if (ContadorAuxiliar <= 33) {
-				if (getId() == ContadorAuxiliar && getX() > 10) {
+			if (ContadorAuxiliarJames <= 500) {
+				if (getId() == ContadorAuxiliarJames && getX() > 10) {
 					setDirecao(BAIXO);
 					System.out.println("Estou indo para baixo");
 				}
-				ContadorAuxiliar++;
+				ContadorAuxiliarJames++;
 			}
 		}
 
@@ -58,14 +57,13 @@ public class JamesConde extends Agente {
 			setDirecao(geraDirecaoAleatoria());
 		}
 
-		if ((ContadorDoJogo % 16) == 0 && isParado()) {
+		if ((ContadorJames % 16) == 0 && isParado()) {
 			// Nao vai deixar nenhum agente parado por mais de 16 tempos.
 			// Sempre que isso acontecer, essa condição dará a ele uma nova direção;
 			setDirecao(geraDirecaoAleatoria());
 		}
 	}
 	
-
 	public void recebeuEnergia() {
 		// Invocado sempre que o agente recebe energia.
 		// Quando ele recebe energia, para. Para conseguir aproveitar o maximo possivel.
@@ -128,7 +126,7 @@ public class JamesConde extends Agente {
 	}
 
 	public String getEquipe() {
-		// Definimos que o nome da equipe do agente é "Pedro e Fabricio".
-		return "Pedro e Fabricio";
+		// Definimos que o nome da equipe do agente é "James Conde".
+		return "James Conde";
 	}
 }
